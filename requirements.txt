@@ -1,0 +1,14 @@
+asgiref==3.7.2
+astroid==3.1.0
+dill==0.3.8
+Django==5.0.3
+django-crispy-forms==2.1
+django-debug-toolbar==4.3.0
+isort==5.13.2
+mccabe==0.7.0
+pillow==10.2.0
+platformdirs==4.2.0
+pylint==3.1.0
+pylint-plugin-utils==0.8.2
+sqlparse==0.4.4
+tomlkit==0.12.4
