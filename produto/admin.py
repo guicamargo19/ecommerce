@@ -10,9 +10,8 @@ class VariacaoInline(admin.TabularInline):
 @admin.register(Produto)
 class ProdutoAdmin(admin.ModelAdmin):
     model = Produto
-    list_display = ('nome', 'descricao_curta', 'descricao_longa',
-                    'preco_marketing', 'preco_marketing_promocional', 'tipo')
+    list_display = ('nome', 'descricao_curta',
+                    'get_preco_formatado', 'get_preco_promo_formatado',)
     ordering = '-id',
     list_filter = 'nome', 'tipo',
-    list_editable = 'tipo',
     inlines = [VariacaoInline]
