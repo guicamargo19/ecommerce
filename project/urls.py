@@ -1,4 +1,3 @@
-# type: ignore
 """
 URL configuration for project project.
 
@@ -24,10 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-
+# TODO: Remover debug toolbar
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [
-        # TODO: Remover debug toolbar
         path('__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
