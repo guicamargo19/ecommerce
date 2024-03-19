@@ -3,11 +3,32 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-lg">
-            <h1>Login</h1>
-        </div>
-        <div class="col-lg">
-            <h1>Cadastro</h1>
+
+        {% if not request.user.is_authenticated %}
+            <div class="col-lg mt-3">
+                <h4>Login</h4>
+                <p>Se você já fez cadastro, basta entrar com seu usuário e senha abaixo.</p>
+                <form method='POST' action="{% url "perfil:login" %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="inputUsuario1">Usuário</label>
+                      <input type="text" name="username" class="form-control" id="inputUsuario1" aria-describedby="usuarioHelp" placeholder="Digite seu usuário">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Senha</label>
+                      <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Digite sua senha">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-clock btn-lg">Entrar</button>
+                  </form>
+            </div>
+        {% endif %}
+            
+        <div class="col-lg mt-3">
+            {% block titulocadastro %}
+                <h4>Cadastro</h4>
+                <p>Caso não tenha cadastro, utilize o formulário abaixo para se cadastrar.</p>
+            {% endblock titulocadastro %}
+            
             <form method="POST" action="">
                 {% csrf_token %}
                 {{ userform|crispy }}
@@ -21,5 +42,6 @@
                 </div>
             </form>
         </div>
+        
     </div>    
 {% endblock content %}
