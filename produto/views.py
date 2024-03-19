@@ -1,12 +1,10 @@
-from pprint import pprint
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views import View
 from django.contrib import messages
-from .models import Produto, Variacao
+from .models import Produto, Variacao  # type: ignore
 
 
 class ListaProdutos(ListView):
@@ -45,7 +43,7 @@ class AdicionarAoCarrinho(View):
         variacao_estoque = variacao.estoque
         produto = variacao.produto
 
-        produto_id = produto.id
+        produto_id = produto.id  # type: ignore
         produto_nome = produto.nome
         variacao_nome = variacao.nome or ''
         preco_unitario = variacao.preco
@@ -116,7 +114,33 @@ class AdicionarAoCarrinho(View):
 
 
 class RemoverDoCarrinho(View):
-    ...
+    def get(self, *args, **kwargs):
+        http_referer = self.request.META.get(
+            'HTTP_REFERER',
+            reverse('produto:lista')
+        )
+        variacao_id = self.request.GET.get('vid')
+
+        if not variacao_id:
+            return redirect(http_referer)
+
+        if not self.request.session.get('carrinho'):
+            return redirect(http_referer)
+
+        if variacao_id not in self.request.session['carrinho']:
+            return redirect(http_referer)
+
+        carrinho = self.request.session['carrinho'][variacao_id]
+
+        messages.success(
+            self.request,
+            f'Produto {carrinho["produto_nome"]} {carrinho["variacao_nome"]} '
+            f'removido do carrinho.'
+        )
+
+        del self.request.session['carrinho'][variacao_id]
+        self.request.session.save()
+        return redirect(http_referer)
 
 
 class Carrinho(View):
