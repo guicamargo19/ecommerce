@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.views import View
+from django.contrib import messages
 from django.contrib.auth.models import User
 from . import models
 from . import forms
@@ -27,7 +29,8 @@ class BasePerfil(View):
                     instance=self.request.user,
                 ),
                 'perfilform': forms.PerfilForm(
-                    data=self.request.POST or None
+                    data=self.request.POST or None,
+                    instance=self.perfil,
                 )
             }
         else:
@@ -42,6 +45,9 @@ class BasePerfil(View):
 
         self.userform = self.contexto['userform']
         self.perfilform = self.contexto['perfilform']
+
+        if self.request.user.is_authenticated:
+            self.template_name = 'perfil/atualizar.html'
 
         self.renderizar = render(
             self.request,
@@ -67,7 +73,7 @@ class Criar(BasePerfil):
         # Usuário logado
         if self.request.user.is_authenticated:
             usuario = get_object_or_404(
-                User, username=self.request.user.username)
+                User, username=self.request.user.username)  # type: ignore
 
             usuario.username = username
 
@@ -79,6 +85,15 @@ class Criar(BasePerfil):
             usuario.last_name = last_name
             usuario.save()
 
+            if not self.perfil:
+                self.perfilform.cleaned_data['usuario'] = usuario
+                perfil = models.Perfil(**self.perfilform.cleaned_data)
+                perfil.save()
+            else:
+                perfil = self.perfilform.save(commit=False)
+                perfil.usuario = usuario
+                perfil.save()
+
         # Usuário não logado
         else:
             usuario = self.userform.save(commit=False)
@@ -89,9 +104,30 @@ class Criar(BasePerfil):
             perfil.usuario = usuario
             perfil.save()
 
+        if password:
+            autentica = authenticate(
+                self.request,
+                username=usuario,
+                password=password
+            )
+
+            if autentica:
+                login(self.request, user=usuario)
+
         self.request.session['carrinho'] = self.carrinho
         self.request.session.save()
-        return self.renderizar
+
+        messages.success(
+            self.request,
+            'Seu cadastro foi criado/atualizado com sucesso'
+        )
+
+        messages.success(
+            self.request,
+            'Você fez login e agora pode concluir sua compra.'
+        )
+
+        return redirect('perfil:criar')
 
 
 class Atualizar(View):
@@ -100,10 +136,41 @@ class Atualizar(View):
 
 
 class Login(View):
-    def get(self, *args, **kwargs):
-        return HttpResponse('Login')
+    def post(self, *args, **kwargs):
+        username = self.request.POST.get('username')
+        password = self.request.POST.get('password')
+        if not username or not password:
+            messages.error(
+                self.request,
+                'Usuário ou senha inválidos.'
+            )
+            return redirect('perfil:criar')
+
+        usuario = authenticate(
+            self.request,
+            username=username,
+            password=password
+        )
+
+        if not usuario:
+            messages.error(
+                self.request,
+                'Usuário ou senha inválidos.'
+            )
+            return redirect('perfil:criar')
+
+        login(self.request, user=usuario)
+        messages.success(
+            self.request,
+            'Você fez login no sistema e agora pode concluir sua compra.'
+        )
+        return redirect('produto:carrinho')
 
 
 class Logout(View):
     def get(self, *args, **kwargs):
-        return HttpResponse('Logout')
+        carrinho = copy.deepcopy(self.request.session.get('carrinho'))
+        logout(self.request)
+        self.request.session['carrinho'] = carrinho
+        self.request.session.save()
+        return redirect('produto:lista')
