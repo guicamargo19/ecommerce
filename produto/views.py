@@ -151,5 +151,5 @@ class Carrinho(View):
         )
 
 
-class Finalizar(View):
+class ResumoDaCompra(View):
     ...
