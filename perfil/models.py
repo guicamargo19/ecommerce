@@ -18,7 +18,7 @@ class Perfil(models.Model):
         max_length=11, help_text='Digite apenas números', verbose_name='CPF')
     endereco = models.CharField(max_length=50, verbose_name='Endereço')
     numero = models.CharField(max_length=5, verbose_name='Número')
-    complemento = models.CharField(max_length=30)
+    complemento = models.CharField(max_length=30, blank=True, null=True)
     bairro = models.CharField(max_length=30)
     cep = models.CharField(max_length=8, verbose_name='CEP',
                            help_text='Digite apenas números')
