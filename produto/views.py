@@ -4,7 +4,8 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views import View
 from django.contrib import messages
-from .models import Produto, Variacao  # type: ignore
+from produto.models import Produto, Variacao  # type: ignore
+from perfil.models import Perfil
 
 
 class ListaProdutos(ListView):
@@ -23,11 +24,6 @@ class DetalheProduto(DetailView):
 
 class AdicionarAoCarrinho(View):
     def get(self, *args, **kwargs):
-        # TODO: Remover linhas abaixo
-        """ if self.request.session.get('carrinho'):
-            del self.request.session['carrinho']
-            self.request.session.save() """
-
         http_referer = self.request.META.get(
             'HTTP_REFERER', reverse('produto:lista'))
         variacao_id = self.request.GET.get('vid')
@@ -77,10 +73,10 @@ class AdicionarAoCarrinho(View):
             if variacao_estoque < quantidade_carrinho:
                 messages.warning(
                     self.request,
-                    f'Estoque insuficiente para {quantidade_carrinho}x no '
-                    f'produto "{produto_nome}". Adicionamos {
-                        variacao_estoque}x'
-                    f'no seu carrinho.'
+                    f'Estoque insuficiente para {
+                        quantidade_carrinho} unidades '
+                    f'do produto "{produto_nome}". Adicionamos '
+                    f'{variacao_estoque} unidades no seu carrinho.'
                 )
                 quantidade_carrinho = variacao_estoque
 
@@ -155,6 +151,22 @@ class ResumoDaCompra(View):
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
             return redirect('perfil:criar')
+
+        perfil = Perfil.objects.filter(usuario=self.request.user).exists()
+
+        if not perfil:
+            messages.error(
+                self.request,
+                'Usuário sem perfil'
+            )
+            return redirect('perfil:criar')
+
+        if not self.request.session.get('carrinho'):
+            messages.error(
+                self.request,
+                'Carrinho vazio'
+            )
+            return redirect('produto:lista')
 
         contexto = {
             'usuario': self.request.user,
