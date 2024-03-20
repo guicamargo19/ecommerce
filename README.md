@@ -6,15 +6,15 @@ Este projeto foi criado no [Curso de Python 3 - Do Básico Ao Avançado (Complet
 
 Projeto possui funcionalidades padrões de um E-commerce, como:
 
-- [x] Model produtos
-- [x] Model variações
-- [x] Listagem e detalhes de produtos e variações
-- [x] Carrinho de compras baseado em session
-- [x] Remover produtos do carrinho
-- [x] Model perfil (criar e atualizar)
-- [x] Login e Logout do cliente
-- [x] Registrar pedido do cliente
-- [x] Página de pagamento
+- [✔️] Model produtos
+- [✔️] Model variações
+- [✔️] Listagem e detalhes de produtos e variações
+- [✔️] Carrinho de compras baseado em session
+- [✔️] Remover produtos do carrinho
+- [✔️] Model perfil (criar e atualizar)
+- [✔️] Login e Logout do cliente
+- [✔️] Registrar pedido do cliente
+- [✔️] Página de pagamento
 
 ## 🚀 Começando
 
