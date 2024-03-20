@@ -57,11 +57,20 @@ class Perfil(models.Model):
         )
     )
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f'{self.usuario}'
 
     def clean(self):
         error_messages = {}
+
+        cpf_enviado = self.cpf or None
+        cpf_salvo = None
+        perfil = Perfil.objects.filter(cpf=cpf_enviado).first()
+
+        if perfil:
+            cpf_salvo = perfil.cpf
+            if cpf_salvo is not None and self.pk != perfil.pk:
+                error_messages['cpf'] = 'CPF já existe.'
 
         if not valida_cpf(self.cpf):
             error_messages['cpf'] = 'Digite um CPF válido'

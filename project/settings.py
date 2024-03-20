@@ -43,12 +43,12 @@ INSTALLED_APPS = [
     'pedido',
 
     'crispy_forms',
-    "crispy_bootstrap5",
+    "crispy_bootstrap4",
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

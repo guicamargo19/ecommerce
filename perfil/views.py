@@ -1,6 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -134,9 +133,9 @@ class Criar(BasePerfil):
         return redirect('produto:carrinho')
 
 
-class Atualizar(View):
+""" class Atualizar(View):
     def get(self, *args, **kwargs):
-        return HttpResponse('Atualizar')
+        return HttpResponse('Atualizar') """
 
 
 class Login(View):
