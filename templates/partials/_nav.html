@@ -1,13 +1,13 @@
 {% load omfilters %}
-<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
-    <a class="navbar-brand" href="{% url 'produto:lista' %}">E-commerce</a>
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg p-3">
+    <a class="navbar-brand" href="{% url 'produto:lista' %}">E-Commerce</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto pr-3">
 
             {% if request.user.is_authenticated %}
             <li class="nav-item dropdown">
