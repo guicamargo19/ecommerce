@@ -156,3 +156,8 @@ SESSION_SAVE_EVERY_REQUEST = False
 
 # Serializer - Padrão Json
 # SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+try:
+    from project.local_settings import *
+except ImportError:
+    ...
