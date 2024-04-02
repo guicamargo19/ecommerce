@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 /deploy/
 /static/
+/media/
 
 # C extensions
 *.so

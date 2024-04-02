@@ -2,6 +2,10 @@
 
 <img src="https://servidor-estatico-tan.vercel.app/commerce.png">
 
+# Publicado
+
+[E-Commerce](https://ecommerce.gtatelie.com.br)
+
 Projeto de E-Commerce desenvolvido em **Django** com **Python**.
 
 Este projeto foi criado no [Curso de Python 3 - Do Básico Ao Avançado (Completo)](https://www.udemy.com/course/python-3-do-zero-ao-avancado/).
