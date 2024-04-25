@@ -1,37 +1,21 @@
 {% load static %}
-<footer class="container-fluid bg-primary p-5">
+<footer class="container-fluid p-5 footer">
     <div class="container text-light">
         <div class="row">
             <div class="col">
-                <div class="p-1">
-                    <span class="align-middle p-1">Desenvolvido em Django com Python</span>
-                </div>
-            </div>
-            <div class="col">
-                <ul class="footer__links">
-                    <li class="footer__links__item">
-                        <a href="https://www.linkedin.com/in/guilherme-ferreira-camargo/">
-                            <i class="bi bi-linkedin"></i>
-                        </a>
-                    </li>
-                    <li class="footer__links__item">
-                        <a href="https://github.com/guicamargo19">
-                            <i class="bi bi-github"></i>    
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col">
-                <div class="p-1 text-right">
-                    <span class="align-middle p-1">2024 &copy; Copyright - Guilherme Camargo</span>
-                </div>
+                <div class="text-center">
+                    {% now "Y" %} © {{site_setup.title}} -
+                      <a href="https://portfolio-pink-omega-63.vercel.app/">
+                        <strong>Portfólio Guilherme Camargo</strong>
+                      </a>- Todos os direitos reservados.
+                  </div>
             </div>
         </div>
     </div>
 </footer>
 
-<script src='{% static "assets/bootstrap/js/jquery-3.2.1.slim.min.js" %}'></script>
-<script src='{% static "assets/bootstrap/js/popper.min.js" %}'></script>
-<script src='{% static "assets/bootstrap/js/bootstrap.min.js" %}'></script>
-<script defer src='{% static "assets/font-awesome/js/all.js" %}'></script>
-<script src='{% static "assets/custom/js/scripts.js" %}'></script>
+<script src={% static "assets/bootstrap/js/jquery-3.2.1.slim.min.js" %}></script>
+<script src={% static "assets/bootstrap/js/popper.min.js" %}></script>
+<script defer src={% static "assets/font-awesome/js/all.js" %}></script>
+<script src={% static "assets/custom/js/scripts.js" %}></script>
+<script src={% static "assets/bootstrap/js/bootstrap.min.js" %}></script>

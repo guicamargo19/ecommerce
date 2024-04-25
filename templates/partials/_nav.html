@@ -1,55 +1,77 @@
 {% load omfilters %}
-<nav class="navbar navbar-dark bg-primary navbar-expand-lg p-4">
-    <a class="navbar-brand" href="{% url 'produto:lista' %}"><h2 class="font-weight-bold">E-Commerce</h2></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto pr-3">
-
-            {% if request.user.is_authenticated %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Conta
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url "perfil:criar" %}">Atualizar dados</a>
-                    <a class="dropdown-item" href="{% url "pedido:lista" %}">Meus pedidos</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url "perfil:logout" %}">Sair</a>
-                </div>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url "perfil:criar" %}">Entrar</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url "perfil:criar" %}">Criar conta</a>
-            </li>
-            {% endif %}
-
-            {% if request.session.carrinho %}
-                <li class="nav-item">
-                    <a class="nav-link nav-cart-link active" href="{% url 'produto:carrinho' %}">
-                        <span class="nav-cart-text mr-1">
-                            Carrinho
-                        </span>
-                        <span class="nav-cart-count mr-1">
-                            <strong>{{request.session.carrinho | cart_total_qtde}}x</strong>
-                        </span>
-                        <span class="nav-cart-icon mr-2">
-                            <i class="fas fa-shopping-cart"></i>
-                        </span>
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
-        <form class="form-inline my-2 my-lg-0" method="GET" action="{% url "produto:busca" %}">
-            <input name="termo" value="{{request.GET.termo}}" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Busca">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Busca</button>
-        </form>
+<div class="hero">
+    <div class="header">
+        <nav class="navbar navbar-dark navbar-expand-lg">
+            <div class="d-flex header-title">
+                <a class="navbar-brand" href="{% url 'produto:lista' %}"><h2 class="font-weight-bold">e-Sports</h2></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>  
+                </button>
+            </div>
+    
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto pr-3">
+    
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            MINHA CONTA
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url "perfil:criar" %}">ATUALIZAR DADOS</a>
+                            <a class="dropdown-item" href="{% url "pedido:lista" %}">MEUS PEDIDOS</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url "perfil:logout" %}">SAIR</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "perfil:criar" %}">ENTRAR</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "perfil:criar" %}">CRIAR CONTA</a>
+                    </li>
+                    {% endif %}
+    
+                    {% if request.session.carrinho %}
+                        <li class="nav-item">
+                            <a class="nav-link nav-cart-link active" href="{% url 'produto:carrinho' %}">
+                                <span class="nav-cart-text mr-1">
+                                    CARRINHO
+                                </span>
+                                <span class="nav-cart-count mr-1">
+                                    <strong>{{request.session.carrinho | cart_total_qtde}}x</strong>
+                                </span>
+                                <span class="nav-cart-icon mr-2">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
     </div>
-</nav>
+    <form class="search-form" action="{% url "produto:busca" %}" method="get">
+        <div class="search-content">
+            <label class="sr-only" id="search-label" for="search-input">Buscar</label>
+            <input
+            class="search-input"
+            type="search"
+            name="termo"
+            id="search-input"
+            placeholder="Buscar"
+            value="{{request.GET.termo}}"
+            required
+            >
+            <button class="search-btn" type="submit" aria-labelledby="search-label">
+            <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </form>
+</div>
+
+

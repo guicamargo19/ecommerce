@@ -1,6 +1,8 @@
 # E-Commerce
 
-<img src="https://servidor-estatico-tan.vercel.app/commerce.png">
+## Apresentação do projeto
+
+
 
 # Publicado
 

@@ -5,18 +5,20 @@
 {% block titulo %}Pagamento | {% endblock titulo %}
 
 {% block content %}
-<div class="row">
-    <div class="col">
-        <h3>Escolha o método de pagamento</h3>
-        <p>Para o desenvolvedor: adicione seu método de pagamento preferido.</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>Escolha o método de pagamento</h3>
+            <p>Para o desenvolvedor: adicione seu método de pagamento preferido.</p>
+        </div>
     </div>
-</div>
 
-{% include "partials/_pedido.html" %}
+    {% include "partials/_pedido.html" %}
 
-<div class="row mt-4">
-    <div class="col">
-        <a href="#" class="btn btn-primary btn-block btn-lg">Pagar</a>
+    <div class="row mt-4">
+        <div class="col">
+            <a href="#" class="btn button btn-block btn-lg">Pagar</a>
+        </div>
     </div>
 </div>
 {% endblock content %}

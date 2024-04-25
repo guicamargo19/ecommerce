@@ -3,13 +3,14 @@
 
 <head>
     {% include "partials/_head.html" %}
-    <title>{% block titulo %}{% endblock titulo %}E-Commerce</title>
+    <title>{% block titulo %}{% endblock titulo %}e-Sports</title>
 </head>
 
 <body>
+    <div class="overlay"></div>
     {% include "partials/_nav.html" %}
-
-    <main class="container mt-4 mb-4">
+    
+    <main class="mt-4 mb-4">
         {% include "partials/_messages.html" %}
         {% block content %}{% endblock content %}
     </main>
