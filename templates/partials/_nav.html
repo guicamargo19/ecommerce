@@ -4,7 +4,7 @@
     <div class="header">
         <nav class="navbar navbar-dark navbar-expand-lg">
             <div class="d-flex header-title">
-                <a class="navbar-brand" href="{% url 'produto:lista' %}"><h2 class="font-weight-bold">e-Sports</h2></a>
+                <a class="navbar-brand" href="{% url 'produto:lista' %}"><h1 class="font-weight-bold">e-Sports</h1></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>  
@@ -12,7 +12,7 @@
             </div>
     
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto pr-3">
+                <ul class="navbar-nav ml-auto">
     
                     {% if request.user.is_authenticated %}
                     <li class="nav-item dropdown">

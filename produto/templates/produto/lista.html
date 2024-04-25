@@ -13,7 +13,7 @@
                 <div class="overlay"></div>
                 {% if produto.imagem %}
                 <a class="position-relative" href="{% url 'produto:detalhe' produto.slug  %}">
-                    <img class="card-img-top size" src="{{produto.imagem.url}}" alt="{{produto.nome}}">
+                    <img class="card-img-top" src="{{produto.imagem.url}}" alt="{{produto.nome}}">
                 </a>
                 {% endif %}
                 <div class="card-body">
