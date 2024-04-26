@@ -1,8 +1,8 @@
-# E-Commerce
+# e-Sports
 
 ## Apresentação do projeto
 
-
+https://github.com/guicamargo19/ecommerce/assets/133445061/512edf9e-eb21-4e78-95a4-1ddb502d4fd0
 
 # Publicado
 
